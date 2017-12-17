@@ -46,7 +46,7 @@ provider:
         - "dynamodb:PutItem"
         - "dynamodb:UpdateItem"
         - "dynamodb:DeleteItem"
-      Resource: "arn:aws:dynamodb:us-southeast-2:*:*"
+      Resource: "arn:aws:dynamodb:ap-southeast-2:*:*"
 
 #    - Effect: "Allow"
 #      Action:
@@ -79,19 +79,19 @@ functions:
     handler: create.main
     events:
       - http:
-        path: notes
-        method: post
-        cors: true
-        authorizer: aws_iam
+          path: notes
+          method: post
+          cors: true
+          authorizer: aws_iam
 
   get:
     handler: get.main
     events:
       - http:
-        path: notes/{id}
-        method: get
-        cors: true
-        authorizer: aws_iam
+          path: notes/{id}
+          method: get
+          cors: true
+          authorizer: aws_iam
 
   list:
     handler: list.main
@@ -99,6 +99,24 @@ functions:
       - http:
           path: notes
           method: get
+          cors: true
+          authorizer: aws_iam
+
+  update:
+    handler: update.main
+    events:
+      - http:
+          path: notes/{id}
+          method: put
+          cors: true
+          authorizer: aws_iam
+
+  delete:
+    handler: delete.main
+    events:
+      - http:
+          path: notes/{id}
+          method: delete
           cors: true
           authorizer: aws_iam
 
